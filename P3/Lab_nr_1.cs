@@ -26,7 +26,7 @@ namespace P3_Lab_nr1
             var age = rnd.Next(18, 101);
             return age;
         }
-        static int SumAge(Person[] array)
+        static void SumAge(Person[] array)
         {
             var sum = 0;
             for (int i = 0; i < array.Length; i++)
@@ -34,7 +34,6 @@ namespace P3_Lab_nr1
                 sum += array[i].Age;
             }
             Console.WriteLine("The whole sum of their age is: " + sum);
-            return sum;
         }
 
         static void Main(string[] args)
