@@ -22,7 +22,7 @@ namespace P3_Zad2
         }
         public override string ToString()
         {
-            return $"Product: {ProductName} | Value: {Value} | ID: {_id} ";
+            return $"Product: {ProductName} | Value: {Value} | ID: {Id} ";
         }
     }
     class Program
