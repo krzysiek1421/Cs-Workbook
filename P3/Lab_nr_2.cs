@@ -7,18 +7,18 @@ namespace P3_Zad2
         private static int _nrOfInstances = 1;
         public string ProductName;
         public int Value;
-        public int _id;
+        public int Id;
         public Product()
         {
             ProductName = "";
             Value = 0;
-            _id = _nrOfInstances++;
+            Id = _nrOfInstances++;
         }
         public Product(string Name, int ValueOfProduct)
         {
             ProductName = Name;
             Value = 5;
-            _id = _nrOfInstances++;
+            Id = _nrOfInstances++;
         }
         public override string ToString()
         {
