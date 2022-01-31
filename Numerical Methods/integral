@@ -23,7 +23,7 @@ namespace Integral
                 {
                     h = (upperLimit - lowerLimit) / interval;
                     var x = lowerLimit + (h * i);
-                    var y = Math.Sin(Math.Sqrt(x));
+                    var y = IntegralFunction(x);
                     sum += y;
                 }
 
@@ -64,8 +64,8 @@ namespace Integral
                     }
                 }
 
-                var y0 = Math.Sin(Math.Sqrt(lowerLimit + (0 * h)));
-                var ym = Math.Sin(Math.Sqrt(lowerLimit + (m * h)));
+                var y0 = IntegralFunction(lowerLimit + (0 * h);
+                var ym = IntegralFunction(lowerLimit + (m * h);
                 newValue = (h / 3) * (y0 + ym + (sum1 * 4) + (sum2 * 2));
 
             } while (Math.Abs(newValue - oldValue) >= eps);
