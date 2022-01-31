@@ -1,0 +1,88 @@
+using System;
+
+namespace Integral
+{
+    class Program
+    {
+
+        public static double IntegralFunction(double functionValue) => Math.Sin(Math.Sqrt(functionValue));
+
+        public static double TrapezoidalRule(int lowerLimit, int upperLimit, double eps)
+        {
+            var step = 0;
+            double interval = 1, h = lowerLimit - upperLimit;
+            double newValue = (h / 2) * IntegralFunction(lowerLimit) + IntegralFunction(upperLimit), oldValue;
+            do
+            {
+                step++;
+                oldValue = newValue;
+                interval *= 2;
+                double sum = 0;
+
+                for (var i = 0; i <= (interval - 1); i++)
+                {
+                    h = (upperLimit - lowerLimit) / interval;
+                    var x = lowerLimit + (h * i);
+                    var y = Math.Sin(Math.Sqrt(x));
+                    sum += y;
+                }
+
+                newValue = (h / 2) * (IntegralFunction(lowerLimit) + IntegralFunction(upperLimit) + 2 * sum);
+            } while (Math.Abs(newValue - oldValue) >= eps);
+
+            Console.WriteLine($"Precision = {eps}" +
+                              $"\nTrapeze Method:" +
+                              $"\nIntegral Value: {newValue}" +
+                              $"\nNumber of steps: {step}");
+            return newValue;
+        }
+
+        public static double SimpsonsRule(int lowerLimit, int upperLimit, double eps)
+        {
+            var step = 0;
+            double h = (upperLimit - lowerLimit) / 2, m = 2, oldValue;
+            var newValue = (h / 3) * IntegralFunction(lowerLimit) +
+                              4 * (IntegralFunction(lowerLimit - upperLimit) / 2) + IntegralFunction(upperLimit);
+            do
+            {
+                m *= 2;
+                step++;
+                oldValue = newValue;
+                double sum1 = 0, sum2 = 0;
+                for (var i = 0; i <= (m - 1); i++)
+                {
+                    h = (upperLimit - lowerLimit) / m;
+                    var x = lowerLimit + (i * h);
+                    var y = IntegralFunction(x);
+                    if (i % 2 != 0)
+                    {
+                        sum1 += y;
+                    }
+                    else
+                    {
+                        sum2 += y;
+                    }
+                }
+
+                var y0 = Math.Sin(Math.Sqrt(lowerLimit + (0 * h)));
+                var ym = Math.Sin(Math.Sqrt(lowerLimit + (m * h)));
+                newValue = (h / 3) * (y0 + ym + (sum1 * 4) + (sum2 * 2));
+
+            } while (Math.Abs(newValue - oldValue) >= eps);
+
+            Console.WriteLine($"=================" +
+                              $"\nPrecision = {eps}" +
+                              $"\nSimpson Method:" +
+                              $"\nIntegral Value: {newValue}" +
+                              $"\nNumber of steps: {step}");
+            return newValue;
+        }
+
+
+        static void Main(string[] args)
+        {
+            TrapezoidalRule(0, 5, 0.0001);
+            SimpsonsRule(0, 5, 0.0001);
+        }
+    }
+}
